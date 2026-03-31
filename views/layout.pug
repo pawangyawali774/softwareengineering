@@ -1,0 +1,59 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title FoodShare | Community
+    link(rel="stylesheet", href="/css/style.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css")
+  body
+    nav.navbar
+      div.nav-container
+        a.logo(href="/")
+          i.fas.fa-leaf
+          span  FoodShare
+
+        div.nav-links
+          a(href="/")
+            i.fas.fa-home
+            |  Home
+          a(href="/post-food")
+            i.fas.fa-plus-circle
+            |  Post Food
+          a(href="/dashboard")
+            i.fas.fa-chart-bar
+            |  Dashboard
+          a(href="/leaderboard")
+            i.fas.fa-trophy
+            |  Leaderboard
+          a(href="/safety")
+            i.fas.fa-shield-alt
+            |  Safety
+
+          if user
+            a(href="/inbox")
+              i.fas.fa-inbox
+              |  Inbox
+            a(href="/profile")
+              i.fas.fa-user-circle
+              |  #{user.name.split(' ')[0]}
+            a.btn-nav-logout(href="/logout")
+              i.fas.fa-sign-out-alt
+              |  Logout
+          else
+            span.nav-divider |
+            a(href="/login") Login
+            a.btn-nav-signup(href="/signup") Sign Up
+
+    main.container
+      block content
+
+    footer
+      div.footer-content
+        p
+          i.fas.fa-leaf
+          |  © 2026 FoodShare — Poor Guys Team | BSc Computer Science | University of Northampton
+        div.footer-links
+          a(href="/safety") Safety Guidelines
+          a(href="/users") Community Members
+          a(href="#") Privacy Policy

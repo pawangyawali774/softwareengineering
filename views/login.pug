@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div.auth-container
+    div.auth-card
+      h2 Welcome Back
+      p.subtitle Login to manage your food posts.
+      
+      if error
+        div.alert-error
+          i.fas.fa-exclamation-circle
+          |  #{error}
+      form(action="/auth/login" method="POST")
+        div.form-group
+          label(for="email") Email Address
+          input(type="email" name="email" required)
+        
+        div.form-group
+          label(for="password") Password
+          input(type="password" name="password" required)
+        
+        button.btn-auth(type="submit") Login
+      
+      p.auth-footer New here? 
+        a(href="/signup") Create an account

@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  div.page-header
+    h1
+      i.fas.fa-users
+      |  Community Members
+    p All registered members of FoodShare Greenwich.
+
+  div.users-grid
+    each u in users
+      div.user-card
+        div.user-avatar
+          i.fas.fa-user-circle
+        div.user-info
+          h3= u.name
+          p
+            i.fas.fa-envelope
+            |  #{u.email}
+          p
+            i.fas.fa-map-marker-alt
+            |  #{u.location || 'Greenwich'}
+
+  if !users || users.length === 0
+    div.empty-state
+      i.fas.fa-users
+      p No members yet.

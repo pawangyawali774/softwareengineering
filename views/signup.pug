@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  div.auth-container
+    div.auth-card
+      h2 Join FoodShare
+      p.subtitle Create an account to start sharing surplus food.
+      
+      if error
+        div.alert-error
+          i.fas.fa-exclamation-circle
+          |  #{error}
+      form(action="/auth/signup" method="POST")
+        div.form-group
+          label(for="name") Full Name
+          input(type="text" name="name" placeholder="Pawan Gnyawali" required)
+        
+        div.form-group
+          label(for="email") Email Address
+          input(type="email" name="email" placeholder="name@example.com" required)
+        
+        div.form-group
+          label(for="location") Location (Area/City)
+          input(type="text" name="location" placeholder="e.g. Greenwich" required)
+        
+        div.form-group
+          label(for="password") Password
+          input(type="password" name="password" required)
+        
+        button.btn-auth(type="submit") Create Account
+      
+      p.auth-footer Already have an account? 
+        a(href="/login") Login here

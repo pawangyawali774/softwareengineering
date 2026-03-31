@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  div.page-header
+    h1
+      i.fas.fa-trophy
+      |  Food Saviours Leaderboard
+    p Our top community contributors making Greenwich greener.
+
+  div.leaderboard-list
+    each leader, index in leaders
+      div.leaderboard-card(class=index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : '')
+        div.rank
+          if index === 0
+            i.fas.fa-crown
+          else
+            span= index + 1
+        div.leader-info
+          h3= leader.name
+          p
+            i.fas.fa-map-marker-alt
+            |  #{leader.location || 'Greenwich'}
+        div.leader-score
+          span.score-number= leader.total_shared
+          span.score-label items shared
+
+  if !leaders || leaders.length === 0
+    div.empty-state
+      i.fas.fa-trophy
+      p No contributors yet. Be the first!
+      a(href="/post-food") Share Food

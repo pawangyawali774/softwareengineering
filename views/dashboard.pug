@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  div.dashboard-header
+    h1
+      i.fas.fa-chart-bar
+      |  Sustainability Dashboard
+    p Real-time impact of the FoodShare community in Greenwich.
+
+  div.stats-grid
+    div.stat-card.green
+      i.fas.fa-box-open
+      div.stat-number= totalShared
+      div.stat-label Total Items Shared
+    div.stat-card.orange
+      i.fas.fa-hand-holding-heart
+      div.stat-number= totalRequested
+      div.stat-label Items Requested
+    div.stat-card.blue
+      i.fas.fa-users
+      div.stat-number= totalUsers
+      div.stat-label Community Members
+    div.stat-card.teal
+      i.fas.fa-leaf
+      div.stat-number= co2Saved + ' kg'
+      div.stat-label CO₂ Diverted
+
+  div.impact-section
+    h2
+      i.fas.fa-globe-europe
+      |  Our Environmental Impact
+    div.impact-cards
+      div.impact-card
+        i.fas.fa-car
+        h3 Car Miles Avoided
+        p= (totalShared * 3).toFixed(0) + ' miles'
+        small Equivalent CO₂ not emitted
+      div.impact-card
+        i.fas.fa-tree
+        h3 Trees Equivalent
+        p= (totalShared * 0.1).toFixed(1) + ' trees'
+        small Annual CO₂ absorption
+      div.impact-card
+        i.fas.fa-tint
+        h3 Water Saved
+        p= (totalShared * 50).toFixed(0) + ' litres'
+        small Water used in food production
+
+  div.cta-section
+    p Want to increase our impact?
+    a.hero-btn(href="/post-food")
+      i.fas.fa-plus
+      |  Share Food Now

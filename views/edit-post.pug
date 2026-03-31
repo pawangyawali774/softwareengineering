@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  div.form-wrapper
+    h2
+      i.fas.fa-edit
+      |  Edit Food Post
+    p Update the details of your shared item.
+
+    form(action=`/edit-post/${post.id}` method="POST" enctype="multipart/form-data")
+      input(type="hidden" name="existing_image" value=post.image || '')
+
+      div.form-group
+        label Food Name
+        input(type="text" name="food_name" value=post.food_name required)
+
+      div.form-group
+        label Category
+        select(name="category")
+          each cat in ['Vegetables','Fruits','Dairy','Bakery','Cooked Meals','Canned/Dry','Other']
+            option(value=cat selected=cat===post.category)= cat
+
+      div.form-row
+        div.form-group
+          label Quantity
+          input(type="text" name="quantity" value=post.quantity required)
+        div.form-group
+          label Expiry Date
+          input(type="date" name="expiry_date" value=post.expiry_date required)
+
+      div.form-group
+        label Replace Photo (optional)
+        input(type="file" name="image" accept="image/*")
+        if post.image
+          p.current-image
+            i.fas.fa-image
+            |  Current: #{post.image}
+
+      button.btn-submit(type="submit")
+        i.fas.fa-save
+        |  Save Changes

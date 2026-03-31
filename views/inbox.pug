@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  div.page-header
+    h1
+      i.fas.fa-inbox
+      |  My Request Inbox
+    p People who want your food items.
+
+  if inbox && inbox.length > 0
+    div.inbox-list
+      each item in inbox
+        div.inbox-card
+          div.inbox-info
+            h3= item.food_name
+            p
+              i.fas.fa-user
+              |  Requested by: 
+              strong= item.requester_name
+            p
+              i.fas.fa-envelope
+              |  #{item.requester_email}
+            p.inbox-time
+              i.fas.fa-clock
+              |  #{new Date(item.created_at).toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'})}
+          div.inbox-status
+            span.status-tag(class=item.status)= item.status
+  else
+    div.empty-state
+      i.fas.fa-inbox
+      p No requests yet. Share food to start receiving requests!
+      a(href="/post-food") Post Food

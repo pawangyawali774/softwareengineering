@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  div.form-wrapper
+    h2
+      i.fas.fa-seedling
+      |  Post Surplus Food
+    p Enter the details of the food you'd like to share with the community.
+
+    form(action="/add-post" method="POST" enctype="multipart/form-data")
+      div.form-group
+        label Food Name
+        input(type="text" name="food_name" placeholder="e.g. Fresh Tomatoes" required)
+
+      div.form-group
+        label Category
+        select(name="category")
+          option(value="Vegetables") 🥦 Vegetables
+          option(value="Fruits") 🍎 Fruits
+          option(value="Dairy") 🥛 Dairy
+          option(value="Bakery") 🍞 Bakery
+          option(value="Cooked Meals") 🍲 Cooked Meals
+          option(value="Canned/Dry") 🥫 Canned / Dry Goods
+          option(value="Other") 📦 Other
+
+      div.form-row
+        div.form-group
+          label Quantity
+          input(type="text" name="quantity" placeholder="e.g. 5kg" required)
+        div.form-group
+          label Expiry Date
+          input(type="date" name="expiry_date" required)
+
+      div.form-group
+        label Food Photo (optional)
+        input(type="file" name="image" accept="image/*")
+
+      button.btn-submit(type="submit")
+        i.fas.fa-share-alt
+        |  Share Food Item

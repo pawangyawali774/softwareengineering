@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  header.hero
+    h1
+      i.fas.fa-seedling
+      |  Share More. Waste Less.
+    p Help your neighbors in Greenwich by sharing surplus food.
+    div.hero-stats
+      div.hero-stat
+        span.hero-stat-number= totalSaved
+        span.hero-stat-label Meals Shared
+      div.hero-stat
+        span.hero-stat-number= (totalSaved * 2.5).toFixed(0)
+        span.hero-stat-label kg CO₂ Saved
+    a.hero-btn(href="/post-food")
+      i.fas.fa-plus
+      |  Share Food Now
+
+  section.listings
+    div.section-header
+      h2
+        i.fas.fa-map-marker-alt
+        |  Available Food Nearby
+    div.grid
+      if posts && posts.length > 0
+        each post in posts
+          div.card
+            if post.image
+              img.card-img(src=`/uploads/${post.image}` alt=post.food_name)
+            else
+              div.card-img-placeholder
+                i.fas.fa-utensils
+            div.card-header
+              h3= post.food_name
+              span.status-tag= post.status
+            div.card-body
+              span.category-badge= post.category || 'Other'
+              p
+                i.fas.fa-weight-hanging
+                strong  Quantity: 
+                | #{post.quantity}
+              p
+                i.fas.fa-calendar-alt
+                strong  Expiry: 
+                | #{post.expiry_date}
+              form(action=`/request/${post.id}` method="POST")
+                button.btn-request(type="submit")
+                  i.fas.fa-hand-holding-heart
+                  |  Request Item
+      else
+        div.empty-state
+          i.fas.fa-box-open
+          p No food items available yet.
+          a(href="/post-food") Be the first to share!
