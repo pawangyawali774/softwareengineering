@@ -375,4 +375,4 @@ To see the pipeline: Go to your GitHub repo → **Actions** tab → look for a �
 
 ---
 
-_BSc Computer Science — University of Northampton © 2026_
+_BSc Computer Science — University of roehampton © 2026_
