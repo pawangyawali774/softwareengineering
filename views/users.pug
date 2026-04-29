@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  div.page-header
+    h1
+      i.fas.fa-users
+      |  Community Members
+    p All registered members of FoodShare Greenwich.
+
+  div.users-grid
+    each u in users
+      div.user-card
+        div.user-avatar
+          i.fas.fa-user-circle
+        div.user-info
+          h3= u.name
+          p
+            i.fas.fa-map-marker-alt
+            |  #{u.location || 'Greenwich'}
+          p
+            i.fas.fa-star
+            |  #{u.points || 0} pts
+          div.rating-display
+            if u.avg_rating
+              span.avg-rating
+                i.fas.fa-star.star-filled
+                |  #{u.avg_rating} / 5
+              span.rating-count  (#{u.rating_count} ratings)
+            else
+              span.no-rating No ratings yet
+
+          if user && user.id !== u.id
+            form.rating-form(action=`/rate/${u.id}` method="POST")
+              div.stars
+                each val in [1,2,3,4,5]
+                  input(type="radio" name="score" id=`star-${u.id}-${val}` value=val required)
+                  label(for=`star-${u.id}-${val}`)
+                    i.fas.fa-star
+              button.btn-rate(type="submit") Rate
+
+  if !users || users.length === 0
+    div.empty-state
+      i.fas.fa-users
+      p No members yet.

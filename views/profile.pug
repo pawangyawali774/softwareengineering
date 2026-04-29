@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  div.profile-header
+    div.profile-info
+      div.avatar
+        i.fas.fa-user-circle.fa-4x
+      div.details
+        h1= user.name
+        p 
+          i.fas.fa-envelope
+          |  #{user.email}
+        p 
+          i.fas.fa-map-marker-alt
+          |  #{user.location}
+        p
+          i.fas.fa-star
+          |  Points: #{user.points || 0}
+    div.profile-actions
+      a.btn-secondary(href="/post-food") Post New Item
+  
+  hr
+
+  section.user-posts
+    h2 Your Active Food Posts
+    div.grid
+      if myPosts && myPosts.length > 0
+        each post in myPosts
+          div.card
+            h3= post.food_name
+            p Expiry: #{post.expiry_date}
+            span.status-tag(class=post.status)= post.status
+            div.card-actions
+              a.btn-edit(href=`/edit-post/${post.id}`) Edit
+              form(action=`/delete-post/${post.id}` method="POST" onsubmit="return confirm('Remove this item?')")
+                button.btn-delete(type="submit") Remove
+      else
+        p You haven't shared any food yet.

@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  div.page-header
+    h1
+      i.fas.fa-shield-alt
+      |  Food Safety Guidelines
+    p Ensuring every shared meal is safe for our community.
+
+  div.safety-grid
+    div.safety-card
+      div.safety-icon.green
+        i.fas.fa-check-circle
+      h3 What You CAN Share
+      ul
+        li Unopened packaged foods within expiry date
+        li Fresh fruits and vegetables in good condition
+        li Home-cooked meals (clearly labelled with ingredients)
+        li Sealed dairy products within date
+        li Dry goods: rice, pasta, lentils, cereals
+
+    div.safety-card
+      div.safety-icon.red
+        i.fas.fa-times-circle
+      h3 What NOT to Share
+      ul
+        li Foods past their use-by date
+        li Opened or partially consumed items
+        li Foods with visible mould or unusual smell
+        li Raw meat or fish
+        li Foods without allergen information
+
+    div.safety-card
+      div.safety-icon.orange
+        i.fas.fa-thermometer-half
+      h3 Storage & Handling
+      ul
+        li Keep hot food above 63°C until collection
+        li Keep cold food below 5°C
+        li Use clean, sealed containers
+        li Label with date prepared and ingredients
+        li Collect within 2 hours of posting
+
+    div.safety-card
+      div.safety-icon.blue
+        i.fas.fa-allergies
+      h3 Allergen Awareness
+      ul
+        li Always list the 14 major allergens
+        li Common: Gluten, Dairy, Nuts, Eggs, Soy
+        li Mark clearly on packaging or in the post
+        li When in doubt, leave it out
+        li Respect dietary requirements (Halal, Vegan, etc.)
+
+  div.safety-footer
+    i.fas.fa-info-circle
+    |  For more information, visit the 
+    a(href="https://www.food.gov.uk" target="_blank") UK Food Standards Agency
+    | .

@@ -1,0 +1,74 @@
+extends layout
+
+block content
+  div.page-header
+    h1
+      i.fas.fa-magic
+      |  Food Matches For You
+    p Based on your request history and location.
+
+  h2
+    i.fas.fa-star
+    |  Basic Matches (Category)
+  div.grid
+    if basic && basic.length > 0
+      each post in basic
+        div.card
+          div.card-header
+            h3= post.food_name
+            span.category-badge= post.category
+          div.card-body
+            p
+              i.fas.fa-user
+              |  Shared by #{post.poster_name}
+            p
+              i.fas.fa-weight-hanging
+              |  #{post.quantity}
+            p
+              i.fas.fa-calendar-alt
+              |  Expires: #{post.expiry_date}
+            p.match-score
+              i.fas.fa-check-circle
+              |  Match Score: #{post.match_score}
+            form(action=`/request/${post.id}` method="POST")
+              button.btn-request(type="submit")
+                i.fas.fa-hand-holding-heart
+                |  Request
+    else
+      div.empty-state
+        i.fas.fa-search
+        p No basic matches yet. Request some food items first to train your matches!
+
+  hr
+
+  h2
+    i.fas.fa-brain
+    |  Advanced Matches (Category + Location + Recency)
+  div.grid
+    if advanced && advanced.length > 0
+      each post in advanced
+        div.card
+          div.card-header
+            h3= post.food_name
+            span.category-badge= post.category
+          div.card-body
+            p
+              i.fas.fa-user
+              |  Shared by #{post.poster_name}
+            p
+              i.fas.fa-map-marker-alt
+              |  #{post.poster_location || 'Greenwich'}
+            p
+              i.fas.fa-calendar-alt
+              |  Expires: #{post.expiry_date}
+            p.match-score
+              i.fas.fa-chart-line
+              |  Advanced Score: #{post.advanced_score}
+            form(action=`/request/${post.id}` method="POST")
+              button.btn-request(type="submit")
+                i.fas.fa-hand-holding-heart
+                |  Request
+    else
+      div.empty-state
+        i.fas.fa-brain
+        p No advanced matches found.

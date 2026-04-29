@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  div.page-header
+    h1
+      i.fas.fa-comments
+      |  Messages
+    p Chat with other community members.
+
+  div.messages-layout
+    div.users-sidebar
+      h3 Community Members
+      each u in users
+        a.user-item(href=`/messages?to=${u.id}` class=(toUser && toUser.id === u.id ? 'active' : ''))
+          i.fas.fa-user-circle
+          |  #{u.name}
+
+    div.chat-area
+      if toUser
+        div.chat-header
+          i.fas.fa-user-circle
+          |  Chatting with #{toUser.name}
+
+        div.chat-messages
+          if messages && messages.length > 0
+            each msg in messages
+              div.message(class=(msg.sender_id === user.id ? 'sent' : 'received'))
+                span.msg-sender= msg.sender_id === user.id ? 'You' : msg.sender_name
+                p.msg-content= msg.content
+                span.msg-time= new Date(msg.created_at).toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'})
+          else
+            div.empty-state
+              i.fas.fa-comment-dots
+              p No messages yet. Say hello!
+
+        form.message-form(action="/messages/send" method="POST")
+          input(type="hidden" name="receiver_id" value=toUser.id)
+          input.msg-input(type="text" name="content" placeholder=`Message ${toUser.name}...` required)
+          button.btn-request(type="submit")
+            i.fas.fa-paper-plane
+            |  Send
+      else
+        div.empty-state
+          i.fas.fa-comments
+          p Select a member from the left to start chatting.
